@@ -7,76 +7,121 @@ using System;
 
 namespace Deposito
 {
-    /*Clase que representa la gestión de los depósitos de una granja.
-     * Tiene dos depósitos: pienso y agua. 
-     * La propiedad devuelve el nivel de agua y pienso. 
-     * Los métodos permiten reponer o consumir tanto pienso como agua.
-     * Estos comentarios se deben eliminar y usar comentarios de documentación en su lugar.
-     */
+    /// <summary>
+    /// Clase que representa la gestión de los depósitos de una granja.
+    ///Tiene dos depósitos: pienso y agua.
+    ///La propiedad devuelve el nivel de agua y pienso.
+    ///Los métodos permiten reponer o consumir tanto pienso como agua.
+    ///Estos comentarios se deben eliminar y usar comentarios de documentación en su lugar.
+    /// </summary>
+
     class Deposito
     {
-        private decimal niveldeagua;
-        private decimal niveldepienso;
-        private decimal cantidadmaxima;      //La cantidad máxima a reponer no puede superar el tamaño del DEPÓSITO DE AGUA, se comprueba antes de actualizar los niveles. 
-        private decimal cantidadmaxima2;     //La cantidad máxima a reponer no puede superar el tamaño del DEPÓSITO DE PIENSO, se comprueba antes de actualizar los niveles. 
-        public decimal Niveldeagua
+
+        //Refactorizacion de las variables en estilo caMel.
+
+        /// <summary>
+        /// <param name="nivelAgua"></param>
+        /// </summary>
+        private decimal nivelAgua;
+
+        /// <summary>
+        /// <param name="nivelPienso"></param>
+        /// </summary>
+        private decimal nivelPienso;
+
+        /// <summary>
+        /// <param name="maxAgua"></param>
+        /// </summary>
+        private decimal maxAgua;
+
+        /// <summary>
+        /// <param name="maxPienso"></param>
+        /// </summary>
+        private decimal maxPienso;
+
+
+        public decimal levelAgua
         {
-            get { return niveldeagua; }
-        }
-        public decimal Niveldepienso
-        {
-            get { return niveldepienso; }
-        }
-        public void reponer1(decimal cantidadareponerdeagua)
-        {
-            cantidadmaxima = antidadareponerdeagua + niveldeagua;
-            if (cantidadareponerdeagua > 0 && cantidadmaxima < 10000) ;  //Tamaño del depósito de pienso es de 1000 l.
-            {
-
-                niveldeagua = niveldeagua + cantidadareponerdeagua;
-
-            }
-
-
-
-        }
-        public void reponer2(decimal cantidadareponerdepienso)
-        {
-
-            cantidadmaxima2 = cantidadareponerdepienso + niveldepienso;
-            if (cantidadareponerdepienso > 0 && cantidadmaxima2 < 5000)  //Tamaño del depósito de pienso es de 5000 kg. 
-                niveldepienso = niveldepienso + cantidadareponerdepienso;
+            get { return nivelAgua; }
         }
 
-
-        public decimal consumo1(decimal cantidadaretirardeagua)
+        public decimal levelPienso
         {
-            decimal retirado1 = 0; //Cantidad que se retira
-            if (cantidadaretirardeagua > 0 && cantidadaretirardeagua <= niveldeagua)
-            {
-                retirado1 = cantidadaretirardeagua;
-                niveldeagua = niveldeagua - cantidadaretirardeagua;
-            }
-
-            return retirado1;
-        }
-        public decimal consumo2(decimal cantidadaretirardepienso)
-        {
-            decimal retirado2 = 0; //Cantidad que se retira
-            if (cantidadaretirardepienso > 0 && cantidadaretirardepienso <= niveldepienso)
-            {
-                retirado2 = cantidadaretirardepienso;
-                niveldepienso = niveldepienso - cantidadaretirardepienso;
-            }
-            return retirado2;
+            get { return nivelPienso; }
         }
 
+        /// <summary>
+        /// Nos proporciona la cantidad de agua disponible
+        /// </summary>
+        /// <param name="reponerAgua"></param>
 
+        public void reponerAgua(decimal reponerAgua)
+        {
+            maxAgua = reponerAgua + nivelAgua;
+            if (reponerAgua > 0 && maxAgua < 10000) ;
 
+            nivelAgua = nivelAgua + reponerAgua;
 
-
-
-
+        }
 
     }
+
+    /// <summary>
+    /// Nos proporciona la cantidad de pienso disponible
+    /// </summary>
+    /// <param name="reponerPienso"></param>
+    /// 
+
+    public void reponerPienso(decimal reponerPienso)
+    {
+
+        maxPienso = reponerPienso + nivelPienso;
+        if (reponerPienso > 0 && maxPienso < 5000)
+            nivelPienso = nivelPienso + reponerPienso;
+    }
+
+    /// <summary>
+    /// Nos proporciona la cantidad de pienso disponible
+    /// </summary>
+    /// <param name="consumoAgua"></param>
+    /// 
+
+    public decimal consumoAgua(decimal consumoAgua)
+    {
+        decimal aguaRetirada = 0;
+        if (consumoAgua > 0 && consumoAgua <= nivelAgua)
+        {
+            aguaRetirada = consumoAgua;
+            nivelAgua = nivelAgua - consumoAgua;
+        }
+
+        return aguaRetirada;
+    }
+
+    /// <summary>
+    /// Nos proporciona la cantidad de pienso disponible
+    /// </summary>
+    /// <param name="consumoPienso"></param>
+    /// 
+
+    public decimal consumoPienso(decimal consumoPienso)
+    {
+        decimal piensoRetirado = 0; 
+        if (consumoPienso > 0 && consumoPienso <= nivelPienso)
+        {
+            piensoRetirado = consumoPienso;
+            nivelPienso = nivelPienso - consumoPienso;
+        }
+        return piensoRetirado;
+    }
+
+
+
+
+
+
+
+
+}
 }
