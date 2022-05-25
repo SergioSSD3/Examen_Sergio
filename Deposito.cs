@@ -31,8 +31,11 @@ namespace Deposito
         {
             cantidadmaxima=antidadareponerdeagua+niveldeagua;
             if (cantidadareponerdeagua > 0 && cantidadmaxima < 10000);  //Tamaño del depósito de pienso es de 1000 l.
-            niveldeagua=niveldeagua+cantidadareponerdeagua;
-              
+            {
+             
+                niveldeagua = niveldeagua + cantidadareponerdeagua;
+            
+            } 
 
 
 
